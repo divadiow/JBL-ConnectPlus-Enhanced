@@ -28,6 +28,7 @@ jobs:
           unzip -o .migration/project.zip -d .
           rm -rf .migration
           rm -f .github/workflows/bootstrap-migrate.yml
+          rm -f .github/workflows/build-apk.yml
 
       - name: Commit migrated source
         run: |
