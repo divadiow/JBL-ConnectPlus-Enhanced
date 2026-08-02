@@ -1,0 +1,32 @@
+name: Complete repository migration
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.head_ref == 'agent/migrate-connectplus-enhanced'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Expand maintained project
+        run: |
+          unzip -o .migration/project.zip -d .
+          rm -rf .migration
+          rm -f .github/workflows/bootstrap-migrate.yml
+
+      - name: Commit migrated source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Migrate maintained Android project"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
