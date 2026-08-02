@@ -1,1 +1,1 @@
-8e49042b5052a67297618d16776ad18945c5153eeb36832885bd5d2b085ff91b  ConnectPlusEnhanced-v0.1.1-test2-debug.apk
+17b13ed9b8b085779c52cc550f493e223ce2c7481de520c90792714947c79b9a  ConnectPlusEnhanced-v0.1.1-test2-debug.apk
