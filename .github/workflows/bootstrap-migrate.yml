@@ -17,6 +17,12 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
+      - name: Reassemble and verify maintained project
+        run: |
+          cat .migration/part-*.b64 | tr -d '\n' | base64 --decode > .migration/project.zip
+          echo "aabc3020ab86bdf9bc8ec723897282db15e44f42b4cb25707f6ac7df53b6d6a7  .migration/project.zip" | sha256sum --check --strict
+          unzip -t .migration/project.zip
+
       - name: Expand maintained project
         run: |
           unzip -o .migration/project.zip -d .
